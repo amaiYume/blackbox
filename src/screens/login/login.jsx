@@ -2,25 +2,48 @@ import React from 'react'
 import InputComponent from '../../components/input-component/input';
 import'./login.css'
 import sideimage from  '../../assets/images/login-illustration.png';
-
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { render } from '@testing-library/react';
+import axios from 'axios';
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+// import { render } from '@testing-library/react';
 
 
 
 class Login extends React.Component{
 
     constructor() {
+        
         super();
+        this.changeHandler = this.changeHandler.bind(this);
         this.state = {
-          displayName: "",
           email: "",
           password: "",
-          confirmPassword: "",
+
         };
       }
 
       
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const obj = {
+            email:this.state.email,
+            password: this.state.password,
+        }
+        axios.post('http://localhost/register/login.php', obj)
+        .then(res => {console.log(res.data)
+            alert("Login success"); 
+        })
+        .catch(error => {
+            console.log(error.response);
+            alert("Login failed");
+        })
+        
+    }
+
+    changeHandler = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
       
       
 
@@ -33,19 +56,19 @@ render(){return(
     <div className='grid'>
         <div>
       
-        <form className='form'>
+        <form className='form' onSubmit={this.handleSubmit}>
         <h2>LOGIN</h2>
         <h3>PAGE</h3>
         <div className='container'>
-        <InputComponent label={'email'} placeholder={'i.e. JonnJonzz@email.com'} name={'emai'} type={'email'} id={'email'}/>
-        <InputComponent label={'password'} placeholder={'Jonn#191281'} name={'password'} type={'password'} id={'password'}/>
+        <InputComponent label={'email'} placeholder={'i.e. JonnJonzz@email.com'} onChange = {this.changeHandler} name={'email'} type={'email'} id={'email'}/>
+        <InputComponent label={'password'} placeholder={'Jonn#191281'} name={'password'} onChange = {this.changeHandler} type={'password'} id={'password'}/>
      
         </div>
        
       
    
 
-        <input type={'submit'} className='submit' value={'Register'}/>
+        <input type={'submit'} className='submit' value={'Login'}/>
         </form>
         </div>
         <div>
