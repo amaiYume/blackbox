@@ -30,7 +30,15 @@ class Login extends React.Component{
         }
         axios.post('http://localhost/register/login.php', obj)
         .then(res => {console.log(res.data)
-            alert("Login success"); 
+            let date = new Date(res.data);
+            let curdate = new Date();
+            date.setDate(date.getDate()-10);
+            if(curdate.getYear() === date.getYear() && curdate.getMonth() === date.getMonth() && curdate.getDay() === date.getDay()){
+                if(curdate.getTime()>=date.getTime()){
+                    alert("You have 10 days left");
+                }
+            }
+ 
         })
         .catch(error => {
             console.log(error.response);

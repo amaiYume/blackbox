@@ -12,14 +12,14 @@ class Registration extends React.Component{
 
     constructor() {
         super();
-        this.handleChange = this.handleChange.bind(this);
-        this.state = {
+      
+        this.setstate = {
           displayName: "",
           firstName: "",
           lastName: "",
           email: "",
           password: "",
-          confirmpassword:"";
+          confirmpassword:"",
         };
       }
 
@@ -32,23 +32,31 @@ class Registration extends React.Component{
           last_name:this.state.lastName,
           email:this.state.email,
           password:this.state.password,
-          display_name:this.state.displayName,
-          
+          display_name:this.state.displayName,  
+          confirm_password: this.state.confirmPassword,      
         };  
-        
-        axios.post('http://localhost/register/createuser.php',obj)
-        .then(res=> console.log(res.data))
-        .catch(error => {
-          console.log(error.response)
-        });
+        if(!obj['password'].include(obj['confirm_passwrd']))return;
 
-        this.state = {
+        if (!obj['password'].toUpperCase().includes(obj['first_name'].toUpperCase())){
+          if (!obj['password'].toUpperCase().includes(obj['last_name'].toUpperCase())){
+            if (!obj['password'].toUpperCase().includes(obj['display_name'].toUpperCase())){
+              axios.post('http://localhost/register/createuser.php',obj)
+              .then(res=> console.log(res.data))
+              .catch(error => {
+                console.log(error.response)
+              });
+            }
+          }  
+        }
+
+
+        this.setState ({
           displayName: "",
           firstName: "",
           lastName: "",
           email: "",
           password: "",
-        };
+        });
 
       };
     
@@ -60,31 +68,6 @@ class Registration extends React.Component{
       };
 
       
-      
-//       handleSubmit = async (event) => {
-//         event.preventDefault();
-//         const { displayName, email, password, confirmPassword } = this.state;
-//         if (password !== confirmPassword) {
-//           alert("password dont match");
-//           return;
-//         }
-//         createUserWithEmailAndPassword(auth, email, password)
-//         .then((userCredential) => {
-//           // Signed in 
-//           const user = userCredential.user;
-//           // ...
-//         })
-//         .catch((error) => {
-//           const errorCode = error.code;
-//           const errorMessage = error.message;
-//           // ..
-//         });
-//       };
-    
-      handleChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
-      };
 
 
 render(){return(
