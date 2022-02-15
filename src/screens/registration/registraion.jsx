@@ -35,7 +35,10 @@ class Registration extends React.Component{
           display_name:this.state.displayName,  
           confirm_password: this.state.confirmPassword,      
         };  
-        if(!obj['password'].include(obj['confirm_passwrd']))return;
+        if(!obj['password'].include(obj['confirm_passwrd'])){
+            alert("password not same");
+            return;
+        }
 
         if (!obj['password'].toUpperCase().includes(obj['first_name'].toUpperCase())){
           if (!obj['password'].toUpperCase().includes(obj['last_name'].toUpperCase())){
@@ -56,6 +59,7 @@ class Registration extends React.Component{
           lastName: "",
           email: "",
           password: "",
+          confirmPassword: "",
         });
 
       };
