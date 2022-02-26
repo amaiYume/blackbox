@@ -1,0 +1,55 @@
+h2{
+    color: #e8b305;
+    font-size: 4em;
+}
+h3{
+    font-size: 5em;
+    line-height: .5;
+}
+img{
+    width: 35vw;
+
+
+}
+.grid{
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+
+}
+.container{
+    margin: 40px 0;
+}
+.submit{
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 2em;
+    padding: 20px;
+    min-width: 10vw;
+    border-radius: 10px;
+}
+.submit:hover{
+    background-color: #e8b305;
+    cursor: pointer;
+}
+.container-fixed{
+    position: fixed;
+    right: 0;
+    padding-right: 6vw;
+}
+.toSignInButton{
+    background-color: white;
+    color: black;
+    padding: 20px;
+    margin: 40px 0;
+    border-radius: 10px;
+}
+.toSignInButton:hover{
+    background-color: #e8b305;
+    cursor: pointer;
+}
+.form{padding: 20vh 0;} 

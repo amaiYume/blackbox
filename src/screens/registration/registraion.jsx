@@ -3,6 +3,7 @@ import InputComponent from '../../components/input-component/input';
 import'./registration.css'
 import sideimage from  '../../assets/images/register-illustration.png';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 // const auth = getAuth();
@@ -32,24 +33,28 @@ class Registration extends React.Component{
           last_name:this.state.lastName,
           email:this.state.email,
           password:this.state.password,
-          display_name:this.state.displayName,  
-          confirm_password: this.state.confirmPassword,      
+          display_name:this.state.displayName,        
         };  
-        if(!obj['password'].include(obj['confirm_passwrd'])){
-            alert("password not same");
-            return;
-        }
-
+        
         if (!obj['password'].toUpperCase().includes(obj['first_name'].toUpperCase())){
           if (!obj['password'].toUpperCase().includes(obj['last_name'].toUpperCase())){
             if (!obj['password'].toUpperCase().includes(obj['display_name'].toUpperCase())){
               axios.post('http://localhost/register/createuser.php',obj)
-              .then(res=> console.log(res.data))
+              .then(res=> {
+                alert("Registered Successfully!");
+                console.log(res.data)
+              })
               .catch(error => {
                 console.log(error.response)
               });
+            }else{
+              alert('Password does not conform to the Password Policy!');
             }
+          }else{
+            alert('Password does not conform to the Password Policy!');
           }  
+        }else{
+          alert('Password does not conform to the Password Policy!');
         }
 
 
@@ -59,7 +64,6 @@ class Registration extends React.Component{
           lastName: "",
           email: "",
           password: "",
-          confirmPassword: "",
         });
 
       };
@@ -109,7 +113,9 @@ render(){return(
         <div className='container-fixed'>
             
         <img src={sideimage} alt='register illustration' />
-        <h1 className='toSignInButton'>Already have an acccount? Sign in</h1>
+        <Link to ={"/login"}>
+          <h1 className='toSignInButton'>Already have an acccount? Sign in</h1>
+        </Link>
         </div>
         </div>
        

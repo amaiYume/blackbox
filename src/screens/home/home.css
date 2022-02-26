@@ -1,0 +1,10 @@
+.home{
+    padding:  3vh 5vw 20vh 5vw ;
+}
+.genre-list{
+    display: flex; 
+    flex-direction: row;
+    overflow: scroll;
+ /* overflow-X: hidden; */
+    overflow-y: hidden;
+}

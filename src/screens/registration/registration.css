@@ -12,7 +12,8 @@ img{
 
 }
 .grid{
-    
+    padding:  3vh 20vw 20vh 20vw ;
+        color: white;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr;
