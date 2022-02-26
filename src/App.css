@@ -1,17 +1,41 @@
 *{
-  background-color: #0a0a0a;
-  color: white;
+
+  
   font-weight: bold;
   font-family: 'Teko', sans-serif;
   margin: 0;
 }
 .App{
-  padding:  3vh 20vw 20vh 20vw ;
+ 
+  background-color: #0a0a0a;
  
 }
-.header{
-  background-color:#171717;
-  height: 30vh;
-  margin: 30px 0;
-  border-radius: 20px;
+
+.website-title{
+  color: white;
+
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  padding: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0a0a0a; 
+  padding: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(28, 28, 28); 
+  border-radius: 10px;
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e49012; 
+
 }

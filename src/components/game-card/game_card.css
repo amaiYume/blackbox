@@ -1,0 +1,38 @@
+.game-card{
+    padding: 20px 20px;
+    line-height: 20px;
+   display: inline-block;
+   background-color:#171717;
+   margin: 20px 20px 0px 0 ;
+   border-radius: 10px;
+   overflow: hidden;
+
+}
+.thumbnail{
+    object-fit: cover;
+    height: 30vh;
+    min-width: 20px;
+    max-width: 220px;
+    border-radius: 10px;
+    
+}
+.learn-more-button{
+  background-color: #e8b305;
+    padding: 5px;
+    margin: 10px 0;
+    float: right;
+    border-radius: 5px;
+    position: relative;
+
+   width: 50%;
+    
+}
+.learn-more-text{
+   color: #171717,
+}
+.card-title{
+    color: #e8b305;
+}
+.card-subtitle{
+    color: white;
+}

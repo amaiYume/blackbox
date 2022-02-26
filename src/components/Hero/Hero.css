@@ -1,0 +1,31 @@
+.hero{
+    background-color: white;
+    padding: 20px 0px 20px  20px;
+    border-radius: 10px;
+    height: 40vh;
+    margin-bottom: 30px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+.hero-title{
+    font-size: 5.8em;
+    line-height: 0.6;
+    margin-top: 40px;
+    color: #171717;
+}
+.hero-subtitle{
+    font-size: 5.8em;
+    color: #e49012;
+}
+.hero-image{
+    max-width: 30vw;
+    margin-left: 15vw;
+    
+}
+.hero-text{
+   
+}
