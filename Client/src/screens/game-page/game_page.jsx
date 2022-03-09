@@ -7,6 +7,8 @@ import AchievementTile from '../../components/achievement_tile/achievement_tile'
 import GenreTile from '../../components/genre-tile/genre-tile';
 import {FiExternalLink} from 'react-icons/fi'
 import {GrInstallOption} from'react-icons/gr'
+import { handleFirebaseSet } from '../../helper/firebase_set';
+import store from '../../redux/store';
 const GamePage = () => {
 
  const location = useLocation()
@@ -15,13 +17,14 @@ const GamePage = () => {
   const [movies, setMovies] = useState([])
   const [achievements, setAchievements] = useState([])
   const [genre,setGenre] = useState([])
+
  useEffect(() => {
   // Update the document title using the browser API
  
   console.log('game data incoming')
   console.log(location.state.id)
  
-    axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}` || `http://localhost:8000/games/${location.state.id}`,
+    axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}`||`http://localhost:8000/games/${location.state.id}`,
         {
         headers:{
             'Content-Type': 'application/json',
@@ -54,7 +57,7 @@ const GamePage = () => {
 
   console.log('incoming movies')
 
-  axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}/movies` || `http://localhost:8000/games/${location.state.id}/movies`,
+  axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}/movies`||`http://localhost:8000/games/${location.state.id}/movies`,
   {
   headers:{
       'Content-Type': 'application/json',
@@ -67,7 +70,7 @@ const GamePage = () => {
   console.log(movies)
 }).catch(error =>console.log(error))
 console.log('incoming achievements')
-axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}/achievements` || `http://localhost:8000/games/${location.state.id}/achievements`,
+axios.get(`https://secret-depths-46783.herokuapp.com/games/${location.state.id}/achievements`||`http://localhost:8000/games/${location.state.id}/achievements`,
 {
 headers:{
     'Content-Type': 'application/json',
@@ -84,6 +87,16 @@ console.log(achievements)
 
 
 },[]);
+
+const handleAddLibrary=(gameName, gameId)=>{
+  console.log(store.getState().currentUser.uid+' uid')
+  const uid = store.getState().currentUser.uid
+ const data = {
+    gameId
+  }
+  handleFirebaseSet(`users/${uid}/library/${gameName}`,data)
+}
+
    return(
     <div>
     
@@ -118,7 +131,7 @@ console.log(achievements)
       
 
       <h6 className='game-developers'>Developed by {gameData.developers!=null?gameData.developers[0].name:null}</h6>
-      <h6 className='install-button'>install</h6>
+      <h6 className='install-button' onClick={()=>{handleAddLibrary(gameData.name,gameData.id)}}>add to library</h6>
       <h6 className='game-esrb_rating'>
       ESRB rating | {gameData.esrb_rating!=null?gameData.esrb_rating.name: null}
       </h6>
@@ -179,13 +192,13 @@ console.log(achievements)
          </div>
 
       {movies.length!=null? 
-      <>
+      <div>
         <h2>Movies</h2>
        <div  className='movie-list'>
        
        {movies.map((item, index)=>
      (
-            <video width={'100%'} autoPlay loop muted className='game-movies' >
+            <video width={'100%'} autoPlay loop className='game-movies' muted>
                <source src={item.data.max} type="video/mp4"/>
               </video>
           
@@ -193,7 +206,7 @@ console.log(achievements)
       
        )}
        </div>
-      </>
+      </div>
      
        :
        null

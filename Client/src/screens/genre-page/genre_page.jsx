@@ -11,7 +11,7 @@ const GenrePage = () => {
 
         console.log('game data incoming')
 
-        axios.get(`https://secret-depths-46783.herokuapp.com/games/genre/${location.state}` ||`http://localhost:8000/games/genre/${location.state}`,
+        axios.get(`https://secret-depths-46783.herokuapp.com/games/genre/${location.state}`||`http://localhost:8000/games/genre/${location.state}`,
         {
         headers:{
             'Content-Type': 'application/json',

@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import GamePage from './screens/game-page/game_page';
 import GenrePage from './screens/genre-page/genre_page';
+import ProfilePage from './screens/profile-page/Profile_page';
 function App() {
  
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="login" element={<Login/>} />
       <Route path="register" element={<Registration/>} />
+      <Route path="profile" element={<ProfilePage/>} />
       <Route path="game" element={<GamePage/>} >
       <Route path=":game_id" element={<GamePage />} />
 

@@ -139,7 +139,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(process.env.PORT||8000, () => {
-console.log(`Listening to ${process.env.PORT}!`)
+console.log(`Listening to ${process.env.PORT||8000}!`)
 })
 
 

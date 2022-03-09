@@ -5,6 +5,7 @@
    background-color:rgb(209, 206, 206);
    margin: 40px 40px 0px 0 ;
    border-radius: 10px;
+   width:min-content;
    overflow: hidden;
    box-shadow: 1px 5px 22px -1px rgba(0,0,0,0.75);
 -webkit-box-shadow: 1px 5px 22px -1px rgba(0,0,0,0.75);

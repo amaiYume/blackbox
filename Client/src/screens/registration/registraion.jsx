@@ -8,6 +8,8 @@ import {AiFillCheckCircle, AiOutlineCheckCircle} from 'react-icons/ai'
 import S from 'string';
 import { handleFirebaseSet } from '../../helper/firebase_set';
 import { handeEncryption } from '../../helper/crytography_helper';
+import store from '../../redux/store';
+import { UserActionTypes } from '../../redux/user/user-type';
 class Registration extends React.Component{
 
  
@@ -120,6 +122,7 @@ class Registration extends React.Component{
     try {
       console.log(email+ 'in try catch')
       console.log(password+ 'in try catch')
+      console.log(store.getState()+'store')
       console.log('contact number' + this.state.contact_number )
       const { user } = await auth.createUserWithEmailAndPassword(
        
@@ -128,6 +131,13 @@ class Registration extends React.Component{
       );
       console.log(auth.getCurrentUser)
      console.log(user)
+     console.log(store.getState()+'store')
+    
+      store.dispatch({
+                type: UserActionTypes.SET_CURRENT_USER,
+                payload:user
+              })
+    console.log(store+'store')
      const userData = {
        'first_name': handeEncryption(this.state.firstName, 'encryption key 123') ,
        'last_name': handeEncryption( this.state.lastName, 'encryption key 123'),

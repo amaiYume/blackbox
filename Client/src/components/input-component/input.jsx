@@ -1,6 +1,6 @@
 import React from 'react'
 import './input.css'
-const InputComponent = ({label, type, name, id, placeholder, value,  ...otherProps}) => (
+const InputComponent = ({label, type, name, id, placeholder,  ...otherProps}) => (
     <span>
         {
             label!=null?  
@@ -10,7 +10,7 @@ const InputComponent = ({label, type, name, id, placeholder, value,  ...otherPro
         }
       
       
-        <input type = {type} name={name} id={id} minLength={3} placeholder={placeholder} autoComplete='true' className={label!=null?'input':'no-label-input'} value = {value} {...otherProps}/>
+        <input type = {type} name={name} id={id} minLength={3} placeholder={placeholder} autoComplete='true' className={label!=null?'input':'no-label-input'}  {...otherProps}/>
     </span>
 )
 

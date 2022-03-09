@@ -8,6 +8,8 @@ import {Link } from 'react-router-dom';
 import {auth, gettingAuth} from '../../firebase/firebase';
 import {Navigate} from 'react-router-dom'
 import {handeEncryption} from '../../helper/crytography_helper'
+import store from '../../redux/store';
+import { UserActionTypes } from '../../redux/user/user-type';
 class Login extends React.Component{
 
     constructor() {
@@ -27,6 +29,8 @@ class Login extends React.Component{
       handleChange = async(event) => {
     
         await this.setState({ [event.target.name]: event.target.value });
+            console.log(event.target.name+' '+event.target.value + ' state: '+this.state[event.target.name])
+          
           };
 
   
@@ -35,14 +39,21 @@ class Login extends React.Component{
             if(this.state.loginAttempts > 0){
             const { email, password } = this.state;
             try {
+              console.log(user)
               await auth.signInWithEmailAndPassword(email, password);
               const user = auth.currentUser
+              console.log(user)
+              // store.dispatch({
+              //   type: UserActionTypes.SET_CURRENT_USER,
+              //   payload:user
+              // })
+              console.log(user)
               if(user){
                 this.setState({ email: "", password: "" });
                 this.setState({notRoute: true});
               }
 
-
+         
             } catch (error) {
               this.setState((prevState)=>({loginAttempts: prevState.loginAttempts-1}));
               alert("Login Failed. Please try again.");
@@ -72,6 +83,7 @@ render(){return(
         <form  onSubmit={this.handleSubmit}>
         <h2>LOGIN</h2>
         <h3>PAGE</h3>
+
         <div className='container'>
         <InputComponent onChange={this.handleChange} label={'email'} placeholder={'i.e. JonnJonzz@email.com'} name={'email'} type={'email'} id={'email'} value = {this.state.email}/>
         <InputComponent onChange={this.handleChange} label={'password'} placeholder={'Jonn#191281'} name={'password'} type={'password'} id={'password'} value = {this.state.password}/>
@@ -81,7 +93,7 @@ render(){return(
       
    
 
-        <input type={'submit'} className='submit' value={'Login'} disabled = {this.state.isDisabled} />
+        <input type={'submit'} className='submit' value={'Login'} />
         </form>
         </div>
         <div>

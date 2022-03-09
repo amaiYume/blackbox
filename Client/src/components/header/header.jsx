@@ -61,7 +61,7 @@ class Header extends React.Component{
              
             </li>
           
-            <Link to="/login" onMouseOver={this.handeHover} onMouseOut={this.handeHoverDismissed}>
+            <Link to="/login" >
               
                 <li>
                 <RiProfileLine className='icon'/>  
