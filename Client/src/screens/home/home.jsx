@@ -21,7 +21,7 @@ class Home extends Component {
       
       fetchUpcoming() {
 
-                axios.get(`https://secret-depths-46783.herokuapp.com/games` ||`http://localhost:8000/games`,
+                axios.get(`https://blackbox-heroku.herokuapp.com/games` ||`http://localhost:8000/games`,
                     {
                     headers:{
                         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ class Home extends Component {
                     this.setState({games:res.data})
                 }).catch(error =>console.log(error))
 
-                axios.get(`https://secret-depths-46783.herokuapp.com/genre` || `http://localhost:8000/genre`,
+                axios.get(`https://blackbox-heroku.herokuapp.com/genre` || `http://localhost:8000/genre`,
                         {
                         headers:{
                             'Content-Type': 'application/json',
