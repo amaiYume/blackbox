@@ -29,7 +29,7 @@ class Login extends React.Component{
       handleChange = async(event) => {
     
         await this.setState({ [event.target.name]: event.target.value });
-            console.log(event.target.name+' '+event.target.value + ' state: '+this.state[event.target.name])
+            // console.log(event.target.name+' '+event.target.value + ' state: '+this.state[event.target.name])
           
           };
 
