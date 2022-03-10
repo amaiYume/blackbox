@@ -31,7 +31,8 @@ class ChangePass extends React.Component{
           isContainSymbol: false,
           isNumeric: false,
           dataInfo: [],
-
+          loginAttempts: 5,
+          isRoute:false,
         };
       }
 
@@ -44,7 +45,7 @@ class ChangePass extends React.Component{
       handleChange = async(event) => {
         await this.setState({ [event.target.name]: event.target.value });
         // console.log(event.target.name+' '+event.target.value + ' state: '+this.state[event.target.name])
-       if(event.target.name ==='password'){
+       if(event.target.name ==='newPassword'){
         
         if(event.target.value.length >= 8){
           this.setState({isGreaterThan8: true})
@@ -106,7 +107,7 @@ class ChangePass extends React.Component{
       
       handleSubmit = async (event) => {
         event.preventDefault();
-        if(this.state.loginAttempts > 0){
+
         const { email, oldPassword, newPassword } = this.state;
         try {
           await auth.signInWithEmailAndPassword(email, oldPassword);
@@ -128,26 +129,18 @@ class ChangePass extends React.Component{
           });
           console.log(user)
           if(user){
-            this.setState({ email: "", password: "" });
+            this.setState({ email: "", oldPassword: "", newPassword: "" });
             this.setState({notRoute: true});
           }
 
      
         } catch (error) {
-          this.setState((prevState)=>({loginAttempts: prevState.loginAttempts-1}));
+          console.log(error)
           alert("Login Failed. Please try again.");
 
         }
-        this.setState({ email: "", password: "" });
-      }else{
-        this.setState({isDisabled: true});
-            // Lock Login Button for 5 minutes and add 3 again to loginAttempts variable
-            setTimeout(()=> {
-                this.setState({isDisabled: false})
-                this.setState({loginAttempts: 3})
-            }, 30000);
-            alert("Too many failed attempts, try again after 30 seconds.");
-      }
+        this.setState({ email: "", oldPassword: "", newPassword: "" });
+
   };
     
 render(){return(
@@ -162,24 +155,8 @@ render(){return(
         <h2>CHANGE</h2>
         <h3>PASSWORD</h3>
         <div className='container'>
-        <InputComponent label={'email'} placeholder={'i.e. JonnJonzz@email.com'} name={'email'} type={'email'} id={'email'}/>
+        <InputComponent onChange={this.handleChange} label={'email'} placeholder={'i.e. JonnJonzz@email.com'} name={'email'} type={'email'} id={'email'}/>
         <InputComponent onChange={this.handleChange} onBlur={this.handleEscapePassword} label={'old password'} placeholder={'Jonn#191281'} onFocus={this.handleFocusOnPassword}  name={'oldPassword'} type={'password'} id={'oldPassword'} value={this.oldPassword}/>
-        {this.state.showPasswordRequirements? 
-           <div>
-           <progress value={this.state.passwordChecksPassed} max="7"> 42% </progress>
-           <ul>
-             <li> {this.state.isUpper? <AiFillCheckCircle className='icon'/> : <AiOutlineCheckCircle className='icon'/>} Contains capital letters</li><br/>
-             <li>{this.state.isLower? <AiFillCheckCircle className='icon'/> : <AiOutlineCheckCircle className='icon'/>} Contains non-capital letters</li><br/>
-             <li>{this.state.isNotContainFirstName? <AiFillCheckCircle className='icon'/>:<AiOutlineCheckCircle className='icon'/> } Must not contain first name</li><br/>
-             <li>{this.state.isNotContainLastName? <AiFillCheckCircle className='icon'/>: <AiOutlineCheckCircle className='icon'/> } Must not contain last name</li><br/>
-             <li>{this.state.isContainSymbol? <AiFillCheckCircle className='icon'/> : <AiOutlineCheckCircle className='icon'/>} Contains symbols</li><br/>
-             <li>{this.state.isNumeric? <AiFillCheckCircle className='icon'/> : <AiOutlineCheckCircle className='icon'/>}Contains numbers</li><br/>
-             <li>{this.state.isGreaterThan8? <AiFillCheckCircle className='icon'/> : <AiOutlineCheckCircle className='icon'/>}More than 8 characters long</li><br/>
-           </ul>
-           </div>  
-           :
-           null
-        }
           <InputComponent onChange={this.handleChange} onBlur={this.handleEscapePassword} label={'new password'} placeholder={'Jonn#191281'} onFocus={this.handleFocusOnPassword}  name={'newPassword'} type={'password'} id={'newPassword'} value={this.newPassword}/>
         {this.state.showPasswordRequirements? 
            <div>
